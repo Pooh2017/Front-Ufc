@@ -2,6 +2,28 @@
 
 Este proyecto es una aplicación para la gestión de usuarios y vehículos, permitiendo la autenticación, registro, y administración de datos tanto de los usuarios como de los vehículos en el sistema.
 
+## Preview
+
+### Login 
+![Login](./login.png)
+
+### Register
+![Register](./register.png)
+
+### Crud Vehiculos
+#### Con funciones como busqueda y paginacion
+
+![Vehiculos](./Vehiculos.png)
+![Vehiculos](./editVe.png)
+![Vehiculos](./crearV.png)
+![Vehiculos](./eliminarV.png)
+
+
+### Crud Usuarios
+#### Con funciones como busqueda y paginacion
+
+![users](./users.png)
+
 ## Características
 
 ### 1. Registro de Usuario
