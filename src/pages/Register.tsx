@@ -35,7 +35,7 @@ const Register = () => {
             return;
         }
 
-        localStorage.setItem("token", data.user.id);
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/");
     }
 

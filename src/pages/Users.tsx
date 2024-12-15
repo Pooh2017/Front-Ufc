@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ConfirmationModal from '../components/ConfirmationModal';
 import CreateUserModal from '../components/CreateUserModal';
 import EditUserModal from '../components/EditUserModal';
+import Created from '../components/ui/Created';
 
 export interface User {
     id: number;
@@ -26,6 +27,7 @@ const UserTable: React.FC = () => {
     const [isCreateModallOpen, setIsCreateModalOpen] = useState(false);
     const [isEditModallOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModallOpen, setIsDeleteModalOpen] = useState(false);
+    const [exito, setExito] = useState({ msg: "Creado con exito", active:false });
     const itemsPerPage = 2;
 
     const fetchUsers = async () => {
@@ -69,6 +71,7 @@ const UserTable: React.FC = () => {
         fetchUsers();
         setCurrentPage(1);
         setIsCreateModalOpen(false);
+        setExito({ msg: "Usuario creado con exito" , active: true});
     };
 
     const handleEditUser = () => {
@@ -89,6 +92,8 @@ const UserTable: React.FC = () => {
     return (
         <div className="p-4">
 
+            {exito.active && (<Created/>)}
+            
             <div className="flex justify-between items-center mb-4">
                 <button className="btn btn-primary" onClick={() => setIsCreateModalOpen(true)}>
                     Crear usuario

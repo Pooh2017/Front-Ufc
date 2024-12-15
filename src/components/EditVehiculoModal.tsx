@@ -27,12 +27,13 @@ const EditVehiculoModal: React.FC<EditVehiculoModalProps> = ({ onClose, onCreate
         formData.append('marca', marca);
         formData.append('placa', placa);
         formData.append('precio_dia', precioDia.toString());
+        formData.append('_method', 'PUT');
 
         if (file) {
             formData.append('foto', file);
         }
 
-        const result = await fetch('http://localhost:8000/api/vehiculos/' + vehiculo.id + "?_method=PUT", {
+        const result = await fetch('http://localhost:8000/api/vehiculos/' + vehiculo.id, {
             method: 'POST',
             body: formData,
         });

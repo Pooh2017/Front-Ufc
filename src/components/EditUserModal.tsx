@@ -23,18 +23,15 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ onClose, onCreate, user }
 
         formData.append('name', name);
         formData.append('email', email);
+        formData.append('_method', 'PUT');
 
         if (file) {
-            console.log('file', file);
-
             formData.append('foto', file);
         }
 
-        const body = file ? formData : JSON.stringify({ name, email });
-
-        const result = await fetch('http://localhost:8000/api/users/' + user.id + '/edit', {
+        const result = await fetch('http://localhost:8000/api/users/' + user.id, {
             method: 'POST',
-            body,
+            body: formData,
         });
 
         const data = await result.json();
