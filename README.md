@@ -119,8 +119,9 @@ Aquí algunas imágenes incluidas en el proyecto:
   ![Crear Peleador](creaP.png)  
   ![Editar Peleador](editarP.png)  
 - **Gestión de Usuarios**  
-  ![Ver Usuario](verU.png)  
-
+  ![Ver Usuario](verU.png)
+  ![Ver Usuario](editarU.png)  
+  ![Ver Usuario](crearU.png)  
 ---
 
 ## 🛠 Configuración Adicional
