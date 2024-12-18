@@ -3,6 +3,7 @@ import ConfirmationModal from '../components/ConfirmationModal';
 import CreateUserModal from '../components/CreateUserModal';
 import EditUserModal from '../components/EditUserModal';
 import Created from '../components/ui/Created';
+import ViewUserModal from '../components/ViewUserModal';
 
 export interface User {
     id: number;
@@ -27,8 +28,9 @@ const UserTable: React.FC = () => {
     const [isCreateModallOpen, setIsCreateModalOpen] = useState(false);
     const [isEditModallOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModallOpen, setIsDeleteModalOpen] = useState(false);
+    const [isViewModallOpen, setIsViewModallOpen] = useState(false);
     const [exito, setExito] = useState({ msg: "Creado con exito", active:false });
-    const itemsPerPage = 2;
+    const itemsPerPage = 4;
 
     const fetchUsers = async () => {
         try {
@@ -90,103 +92,124 @@ const UserTable: React.FC = () => {
     };
 
     return (
-        <div className="p-4">
+<div className="p-4">
 
-            {exito.active && (<Created/>)}
-            
-            <div className="flex justify-between items-center mb-4">
-                <button className="btn btn-primary" onClick={() => setIsCreateModalOpen(true)}>
-                    Crear usuario
-                </button>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="input input-bordered w-full max-w-xs"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+{exito.active && (<Created/>)}
+
+<div className="flex justify-between items-center mb-4">
+    <button className="btn btn-primary hover:bg-blue-700 transition-all duration-300" onClick={() => setIsCreateModalOpen(true)}>
+        Crear usuario
+    </button>
+    <input
+        type="text"
+        placeholder="Buscar..."
+        className="input input-bordered w-full max-w-xs"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+    />
+</div>
+
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {paginatedUsers.map((user) => (
+        <div key={user.id} className="card bg-white shadow-lg rounded-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-gray-100">
+            <div className="card-body p-4">
+                <div className="flex justify-center mb-4">
+                    <img
+                        src={user.photo}
+                        alt={user.name}
+                        className="rounded-full w-20 h-20"
+                    />
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-2">{user.name}</h3>
+                <p className="text-center text-gray-600">{user.email}</p>
+
+                <div className="flex justify-between mt-4">
+                    <button 
+                        className="btn btn-info btn-sm hover:bg-blue-500 transition-all duration-300"
+                        onClick={() => { 
+                            setIsViewModallOpen(true); 
+                            setEditUser(user); 
+                        }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12l4-4m0 0l4 4m-4-4v12" />
+                        </svg>
+                        Ver
+                    </button>
+                    <button 
+                        className="btn btn-warning btn-sm hover:bg-yellow-500 transition-all duration-300"
+                        onClick={() => { 
+                            setIsEditModalOpen(true); 
+                            setEditUser(user); 
+                        }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16M4 12h16" />
+                        </svg>
+                        Editar
+                    </button>
+                    <button
+                        className="btn btn-error btn-sm hover:bg-red-500 transition-all duration-300"
+                        onClick={() => handleDelete(user.id)}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-7 7-7-7" />
+                        </svg>
+                        Borrar
+                    </button>
+                </div>
             </div>
-
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Foto</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginatedUsers.map((user) => (
-                            <tr key={user.id}>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    <img
-                                        src={user.photo}
-                                        alt={user.name}
-                                        className="rounded-full w-10 h-10"
-                                    />
-                                </td>
-                                <td>
-                                    <div className="flex space-x-2">
-                                        <button className="btn btn-info btn-sm">Ver</button>
-                                        <button className="btn btn-warning btn-sm"
-                                            onClick={() => { setIsEditModalOpen(true); setEditUser(user); }}
-                                        >Editar</button>
-                                        <button
-                                            className="btn btn-error btn-sm"
-                                            onClick={() => handleDelete(user.id)}
-                                        >
-                                            Borrar
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div className="flex justify-between items-center mt-4">
-                <button
-                    className="btn btn-outline"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                >
-                    Anterior
-                </button>
-                <span>
-                    Pagina {currentPage} de {totalPages}
-                </span>
-                <button
-                    className="btn btn-outline"
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                >
-                    Siguiente
-                </button>
-            </div>
-
-            {isCreateModallOpen && (
-                <CreateUserModal onClose={() => setIsCreateModalOpen(false)} onCreate={handleCreateUser} />
-            )}
-
-            {isEditModallOpen && (
-                <EditUserModal user={editUser} onClose={() => setIsEditModalOpen(false)} onCreate={handleEditUser} />
-            )}
-
-            <ConfirmationModal
-                isOpen={isDeleteModallOpen}
-                onClose={() => {
-                    setIsDeleteModalOpen(false);
-                    setEditUser({ id: 0, name: '', email: '', photo: '', password: '' });
-                }}
-                onConfirm={handleConfirm}
-                message={"Quieres eliminar al usuario " + editUser.name + " ?"}
-            />
         </div>
+    ))}
+</div>
+
+<div className="flex justify-between items-center mt-4">
+    <button
+        className="btn btn-outline hover:bg-blue-100 transition-all duration-300"
+        disabled={currentPage === 1}
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+    >
+        Anterior
+    </button>
+    <span className="font-medium text-gray-700">
+        Página {currentPage} de {totalPages}
+    </span>
+    <button
+        className="btn btn-outline hover:bg-blue-100 transition-all duration-300"
+        disabled={currentPage === totalPages}
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+    >
+        Siguiente
+    </button>
+</div>
+
+{isCreateModallOpen && (
+    <CreateUserModal onClose={() => setIsCreateModalOpen(false)} onCreate={handleCreateUser} />
+)}
+
+{isEditModallOpen && (
+    <EditUserModal user={editUser} onClose={() => setIsEditModalOpen(false)} onCreate={handleEditUser} />
+)}
+
+{isViewModallOpen && (
+    <ViewUserModal 
+        user={editUser} 
+        onClose={() => setIsViewModallOpen(false)} 
+    />
+)}
+
+<ConfirmationModal
+    isOpen={isDeleteModallOpen}
+    onClose={() => {
+        setIsDeleteModalOpen(false);
+        setEditUser({ id: 0, name: '', email: '', photo: '', password: '' });
+    }}
+    onConfirm={handleConfirm}
+    message={"¿Quieres eliminar al usuario " + editUser.name + "?"}
+/>
+</div>
+
+
     );
 };
 

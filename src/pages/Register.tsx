@@ -45,7 +45,7 @@ const Register = () => {
                 <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl w-full">
                     <figure className="lg:w-1/2">
                         <img
-                            src="https://picsum.photos/seed/login/800/600"
+                            src="/Image/RegisterFondo.jpg"
                             alt="Random image"
                             className="object-cover w-full h-full"
                         />

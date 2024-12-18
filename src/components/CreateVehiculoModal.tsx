@@ -12,12 +12,18 @@ const CreateVehiculoModal: React.FC<CreateVehiculoModalProps> = ({ onClose, onCr
     const [precioDia, setprecioDia] = useState(0);
     const [file, setFile] = useState<File | null>(null);
 
+    
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
+            const selectedFile = e.target.files[0];
+            console.log("Archivo seleccionado:", selectedFile);
             setFile(e.target.files[0]);
+        }else {
+            console.log("No se seleccionó ningún archivo.");
         }
     };
-
+    
+    
     const handleSubmit = async () => {
         const formData = new FormData();
 

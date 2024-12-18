@@ -1,0 +1,113 @@
+/* Estilos para el login */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #333;
+}
+
+/* Contenedor principal de login */
+.login-container {
+    position: relative;
+    height: 100vh;
+    background-image: url('/Image/Login.jpg'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Filtro oscuro para el fondo */
+    z-index: 1;
+}
+
+.login-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.input-group {
+    position: relative;
+}
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d61717;
+    font-size: 1.2rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 40px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+
+
+.input-field:focus {
+    border-color: #FF4081; /* Color de borde al enfocar */
+}
+
+.btn {
+    background-color: #FF4081;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #F50057;
+}
+
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+    
+}
+
+.register-link {
+    color: #FF4081;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link:hover {
+    color: #F50057;
+}

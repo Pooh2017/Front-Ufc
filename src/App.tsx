@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Vehicles from "./pages/Vehicles"
 import Users from "./pages/Users"
+import Fighters from "./pages/Fighters"
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/" element={<Layout />}>
-          <Route index element={<Vehicles />} />
-          <Route path="usuarios" element={<Users />} />
+          <Route index element={<Fighters />} />
+          <Route path="/usuarios" element={<Users />} />
+          <Route path="/fighters" element={<Fighters />} />
         </Route>
 
       </Routes>

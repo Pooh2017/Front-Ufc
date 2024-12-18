@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ConfirmationModal from '../components/ConfirmationModal';
 import CreateVehiculoModal from '../components/CreateVehiculoModal';
 import EditVehiculoModal from '../components/EditVehiculoModal';
+import ViewVehiculoModal from '../components/ViewVehiculoModal';
+
 
 export interface Vehiculo {
     id: number;
@@ -22,6 +24,8 @@ const Vehiculos: React.FC = () => {
     const [isCreateModallOpen, setIsCreateModalOpen] = useState(false);
     const [isEditModallOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModallOpen, setIsDeleteModalOpen] = useState(false);
+    const [isViewModallOpen, setIsViewModallOpen] = useState(false);
+
     const itemsPerPage = 2;
 
     const fetchUsers = async () => {
@@ -67,6 +71,7 @@ const Vehiculos: React.FC = () => {
         setIsEditModalOpen(false);
     };
 
+
     const handleConfirm = async () => {
         await fetch(`http://localhost:8000/api/vehiculos/${editUser.id}`, {
             method: 'DELETE',
@@ -81,7 +86,7 @@ const Vehiculos: React.FC = () => {
 
             <div className="flex justify-between items-center mb-4">
                 <button className="btn btn-primary" onClick={() => setIsCreateModalOpen(true)}>
-                    Crear vehiculo
+                    Crear Peleador
                 </button>
                 <input
                     type="text"
@@ -96,10 +101,10 @@ const Vehiculos: React.FC = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Placa</th>
-                            <th>Precio por dia</th>
+                            <th>Nombre</th>
+                            <th>Apodo</th>
+                            <th>Peso</th>
+                            <th>Peleas</th>
                             <th>Foto</th>
                             <th>Acciones</th>
                         </tr>
@@ -110,7 +115,7 @@ const Vehiculos: React.FC = () => {
                                 <td>{user.modelo}</td>
                                 <td>{user.marca}</td>
                                 <td>{user.placa}</td>
-                                <td>$ {user.precio_dia}</td>
+                                <td>{user.precio_dia}</td>
                                 <td>
                                     <img
                                         src={user.photo_url}
@@ -120,7 +125,16 @@ const Vehiculos: React.FC = () => {
                                 </td>
                                 <td>
                                     <div className="flex space-x-2">
-                                        <button className="btn btn-info btn-sm">Ver</button>
+                                    <button 
+                                            className="btn btn-info btn-sm" 
+                                            onClick={() => { 
+                                                console.log('Abriendo modal', user);
+                                                setIsViewModallOpen(true); 
+                                                setEditUser(user); 
+                                            }}
+                                        >
+                                            Ver
+                                        </button>
                                         <button className="btn btn-warning btn-sm"
                                             onClick={() => { setIsEditModalOpen(true); setEditUser(user); }}
                                         >Editar</button>
@@ -166,6 +180,14 @@ const Vehiculos: React.FC = () => {
                 <EditVehiculoModal vehiculo={editUser} onClose={() => setIsEditModalOpen(false)} onCreate={handleEditUser} />
             )}
 
+            {isViewModallOpen && (
+                <ViewVehiculoModal 
+                    vehiculo={editUser} 
+                    onClose={() => setIsViewModallOpen(false)} 
+                />
+            )}
+
+
             <ConfirmationModal
                 isOpen={isDeleteModallOpen}
                 onClose={() => {
@@ -173,7 +195,7 @@ const Vehiculos: React.FC = () => {
                     setEditUser(vehiculoPlaceholder);
                 }}
                 onConfirm={handleConfirm}
-                message={"Quieres eliminar al vehiculo " + editUser.marca + + " " + editUser.modelo + " ?"}
+                message={"Quieres eliminar al peleador " + editUser.marca + + " " + editUser.modelo + " ?"}
             />
         </div>
     );
