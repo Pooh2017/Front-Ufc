@@ -1,84 +1,163 @@
-# Sistema de Gestión de Usuarios y Vehículos
+# Frontend de Gestión de Peleadores y Usuarios
 
-Este proyecto es una aplicación para la gestión de usuarios y vehículos, permitiendo la autenticación, registro, y administración de datos tanto de los usuarios como de los vehículos en el sistema.
+Este es un proyecto **frontend** construido con **React + TypeScript** y **Vite**, diseñado para gestionar peleadores y usuarios. Incluye autenticación, vistas de peleadores/usuarios y funcionalidades **CRUD** (Crear, Leer, Actualizar, Eliminar).
 
-## Preview
+## 📋 Características
 
-### Login 
-![Login](./login.png)
+1. **Login y Registro**
+   - Pantallas de inicio de sesión y registro de usuarios.
+2. **Gestión de Peleadores**
+   - CRUD completo para peleadores.
+3. **Gestión de Usuarios**
+   - CRUD completo para usuarios.
+4. **Componentes Modales**
+   - Crear, Editar y Visualizar usuarios y peleadores.
+5. **Navegación**
+   - Barra de navegación y diseño con Tailwind CSS.
 
-### Register
-![Register](./register.png)
+---
 
-### Crud Vehiculos
-#### Con funciones como busqueda y paginacion
+## 🚀 Tecnologías Utilizadas
 
-![Vehiculos](./Vehiculos.png)
-![Vehiculos](./editVe.png)
-![Vehiculos](./crearV.png)
-![Vehiculos](./eliminarV.png)
+- **React** + **TypeScript**
+- **Vite** (Herramienta de desarrollo)
+- **Tailwind CSS** (Estilización)
+- **ESLint** (Linting y buenas prácticas)
+- **PostCSS** (Procesador CSS)
 
+---
 
-### Crud Usuarios
-#### Con funciones como busqueda y paginacion
+## 👤 Estructura del Proyecto
 
-![users](./users.png)
+```plaintext
+src/
+├── components/
+│   ├── ui/                # Componentes de interfaz
+│   │   ├── ConfirmationModal.tsx
+│   │   ├── CreateFighterModal.tsx
+│   │   ├── CreateUserModal.tsx
+│   │   ├── EditFighterModal.tsx
+│   │   ├── ViewFighterModal.tsx
+│   │   └── ...           # Otros modales
+│   ├── css/              # Archivos CSS personalizados
+│   └── layout/
+│       ├── Layout.tsx    # Estructura general de layout
+│       └── Navbar.tsx    # Barra de navegación
+├── pages/                # Páginas principales
+│   ├── Fighters.tsx      # Página CRUD de peleadores
+│   ├── Users.tsx         # Página CRUD de usuarios
+│   ├── Login.tsx         # Página de Login
+│   └── Register.tsx      # Página de Registro
+├── assets/               # Imágenes
+│   ├── crearU.png
+│   ├── editarP.png
+│   └── ...               # Otras imágenes
+├── index.html            # Archivo principal HTML
+└── vite.config.ts        # Configuración de Vite
+```
 
-## Características
+---
 
-### 1. Registro de Usuario
-Permite a los nuevos usuarios registrarse proporcionando su nombre, correo electrónico y contraseña. Los usuarios registrados pueden acceder a sus cuentas mediante el login.
+## 🔧 Instalación y Ejecución
 
-- **Ruta**: `/register`
-- **Método**: `POST`
-- **Campos requeridos**:
-  - `nombre`: Nombre del usuario.
-  - `correo`: Correo electrónico único.
-  - `contraseña`: Contraseña segura.
-  - `foto`: Foto del usuario (opcional).
-
-### 2. Login de Usuario
-Los usuarios pueden iniciar sesión con su correo electrónico y contraseña para acceder a su cuenta.
-
-- **Ruta**: `/login`
-- **Método**: `POST`
-- **Campos requeridos**:
-  - `correo`: Correo electrónico del usuario.
-  - `contraseña`: Contraseña del usuario.
-
-### 3. Logout de Usuario
-Los usuarios pueden cerrar sesión para terminar su sesión activa.
-
-- **Ruta**: `/logout`
-- **Método**: `POST`
-
-### 4. CRUD de Usuarios
-Los administradores pueden realizar operaciones CRUD sobre los usuarios, como crear, leer, actualizar y eliminar usuarios. Cada usuario tiene los siguientes campos:
-
-- `nombre`: Nombre del usuario.
-- `correo`: Correo electrónico del usuario.
-- `contraseña`: Contraseña del usuario.
-- `foto`: Foto del usuario.
-
-- **Rutas**:
-  - `GET /usuarios`: Obtener todos los usuarios.
-  - `GET /usuarios/{id}`: Obtener un usuario específico.
-  - `POST /usuarios`: Crear un nuevo usuario.
-  - `PUT /usuarios/{id}`: Actualizar un usuario.
-  - `DELETE /usuarios/{id}`: Eliminar un usuario.
-
-### 5. CRUD de Vehículos
-Permite la gestión de vehículos, donde cada vehículo tiene los siguientes atributos: modelo, marca, placa, foto y precio por día.
-
-- **Rutas**:
-  - `GET /vehiculos`: Obtener todos los vehículos.
-  - `GET /vehiculos/{id}`: Obtener un vehículo específico.
-  - `POST /vehiculos`: Crear un nuevo vehículo.
-  - `PUT /vehiculos/{id}`: Actualizar un vehículo.
-  - `DELETE /vehiculos/{id}`: Eliminar un vehículo.
-
-## Instalación
-
-1. Clona el repositorio:
+1. **Clona el repositorio:**
    ```bash
-   git clone https://github.com/carlosupreme/front-prograweb.git
+   git clone https://github.com/tu-usuario/tu-repositorio.git
+   cd tu-repositorio
+   ```
+
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Ejecuta el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Abre en tu navegador:**
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## 🌟 Uso del Proyecto
+
+### 1. **Inicio de Sesión**
+   - Página: **Login**  
+   - Ingresa tus credenciales para acceder al sistema.  
+   - Captura de Pantalla:  
+     ![Login](login.png)
+
+### 2. **Gestión de Peleadores**
+   - Página: **Fighters**  
+   - Funciones disponibles:  
+     - **Crear**: Agregar nuevos peleadores.  
+     - **Editar**: Modificar detalles de un peleador.  
+     - **Eliminar**: Borrar peleadores.  
+     - **Visualizar**: Ver detalles.  
+   - Captura de Pantalla:  
+     ![Peleador](Peleador.png)
+
+### 3. **Gestión de Usuarios**
+   - Página: **Users**  
+   - Funciones CRUD similares a peleadores.  
+   - Captura de Pantalla:  
+     ![Usuarios](user.png)
+
+---
+
+## 🖼 Capturas de Pantalla
+
+Aquí algunas imágenes incluidas en el proyecto:  
+
+- **Login**  
+  ![Login](login.png)  
+- **Gestión de Peleadores**  
+  ![Crear Peleador](creaP.png)  
+  ![Editar Peleador](editarP.png)  
+- **Gestión de Usuarios**  
+  ![Ver Usuario](verU.png)  
+
+---
+
+## 🛠 Configuración Adicional
+
+### **Tailwind CSS**
+El proyecto usa **Tailwind CSS** para el diseño rápido de la interfaz.  
+Si deseas personalizarlo:  
+1. Configuración en `tailwind.config.js`  
+2. Archivos CSS en `src/components/css/`.
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Para colaborar:
+
+1. Haz un **fork** del repositorio.
+2. Crea una nueva rama:  
+   ```bash
+   git checkout -b feature/nueva-funcionalidad
+   ```
+3. Realiza tus cambios y haz un **commit**:  
+   ```bash
+   git commit -m "Agrega nueva funcionalidad"
+   ```
+4. Envía un **Pull Request**.
+
+---
+
+## 📜 Licencia
+
+Este proyecto está bajo la licencia **MIT**.
+
+---
+
+## 🔗 Contacto
+
+Si tienes preguntas, no dudes en contactarme:  
+**Nombre**: Eder Denilson López González  
+**Correo**: [21160693@itoax.edu.mx](mailto:21160693@itoax.edu.mx)
